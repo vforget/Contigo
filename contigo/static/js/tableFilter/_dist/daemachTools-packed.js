@@ -234,7 +234,7 @@ jQuery.extend(cssMonkey,{
 			var rules,matches=[], sObj=[];
 			for (var i=this.sheets.length-1;i>=0;i--){
 				rules = (this.sheets[i].cssRules) ? this.sheets[i].cssRules : this.sheets[i].rules;
-				if (!rules.length){
+				if (!rules || !rules.length){
 					return matches;
 				}
 				s = s.toLowerCase();
@@ -302,12 +302,12 @@ jQuery.extend(cssMonkey,{
 					rules[i][0].style.cssText = oCSS.join(";");
 				}
 			} else {
-				var sheet = this.sheets[this.sheets.length-1];
-				var rules = sheet.cssRules ? sheet.cssRules : sheet.rules;
-			    if (index == undefined) {
+			    var sheet = this.sheets[this.sheets.length-1];
+			    var rules = sheet.cssRules ? sheet.cssRules : sheet.rules;
+			    if (rules && index == undefined) {
 			        index = rules.length;
 			    }
-				this._insertRule(sheet, selector,styles,index)
+			    this._insertRule(sheet, selector,styles,index)
 			}
 		},
 		_insertRule: function(sheet, selector,styles,index){
