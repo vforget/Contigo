@@ -1,0 +1,349 @@
+#!/usr/bin/env python
+# Filename: contigo.py
+# Author: Vincenzo Forgetta, vincenzo.forgetta@mail.mcgill.ca
+# Methods:
+#################################################################################
+
+import sys
+import re
+from optparse import OptionParser
+import os.path
+import shutil
+import math
+import datetime
+import multiprocessing
+
+sys.path.append("/home/vforget/Dropbox/Contigo")
+from contigo import *
+STATIC_DIR = sys.path[0] + "/../contigo/static/"
+
+
+def update_interface(options, contig_table, scaffold_table):
+    '''Copies interface from source distribution to output dir
+       Parameters: OUTDIR, HTML contig table, HTML scaffold table
+       Returns: Nothing.
+    '''
+    print sys.path[0]
+    try:
+        output_dir = options.output_dir
+        if os.path.exists(output_dir + "/js"):
+            shutil.rmtree(output_dir + "/js")
+        shutil.copytree(STATIC_DIR + "js", output_dir + "/js")
+
+        if os.path.exists(output_dir + "/jquery-ui"):
+            shutil.rmtree(output_dir + "/jquery-ui")
+        shutil.copytree(STATIC_DIR + "js/jquery-ui", output_dir + "/jquery-ui")
+        
+        if os.path.exists(output_dir + "/" + "styles"):
+            shutil.rmtree(output_dir + "/" + "styles")
+        shutil.copytree(STATIC_DIR + "css", output_dir + "/styles")
+        shutil.copy(STATIC_DIR + "images/help_30.png", output_dir)
+        shutil.copy(STATIC_DIR + "html/disclaimer.html", output_dir)
+        
+        of = open(output_dir + "/" + "contigo.html", "w")
+        render.interface(of, options, contig_table, scaffold_table)
+        of.close()
+        af = open(output_dir + "/help.html", 'w')
+        print >> af, render.html_header() + render.html_footer()
+        af.close()
+    except IOError as (errno, errtxt):
+        print errno
+        print errtxt
+        sys.exit("Cannot access/write destination directory or files.")
+
+
+def parse_options():
+    ''' Parse command line options. 
+    Parameters: None.
+    Returns: command line options
+    '''
+    
+    default_outdir = "./" + datetime.datetime.now().strftime("%d%m%Y%k%M%S")
+    usage = "usage: %prog [options]"
+    parser = OptionParser(usage)
+    parser.add_option("-i", "--input_dir", dest="input_dir",
+                      default="./", metavar="INPUTDIR",
+                      help="Read assembly FILEs from INPUTDIR [default: %default]")
+    parser.add_option("-o", "--output_dir", dest="output_dir",
+                      default=default_outdir, metavar="OUTDIR",
+                      help="Write output to OUTDIR [default: %default]")
+    parser.add_option("-a", "--file", dest="assembly", default="454Contigs.ace",
+                      help="Read assembly data from FILE [default: %default]",
+                      metavar="FILE")
+    parser.add_option("-s", "--scaffold", dest="scaffold",
+                      default='454Scaffolds.txt', metavar="FILE",
+                      help="Read scaffold from FILE [default: %default]")
+    parser.add_option("-r", "--read_status", dest="read_status",
+                      default='454ReadStatus.txt', metavar="FILE",
+                      help="Read read status from FILE [default: %default]")
+    parser.add_option("-l", "--pair_status", dest="pair_status",
+                      default='454PairStatus.txt', metavar="FILE",
+                      help="Read pair status from FILE [default: %default]")
+    parser.add_option("-p", "--platform", dest="platform",
+                      default='roche', metavar="PLATFORM",
+                      choices=('roche', 'illumina', 'generic'),
+                      help="Assembly PLATFORM: roche, illumina, generic [default: %default]")
+    parser.add_option("-n", "--no-image", dest="noimage", 
+                      action="store_true", default=False, metavar="SKIP_IMAGE",
+                      help="Set to skip contig images [default: %default]")
+    parser.add_option("-t", "--assembly-name", dest="assembly_name",
+                      default='Assembly', metavar="NAME",
+                      help="Assembly NAME [default: %default]")
+    parser.add_option("-m", "--min-contig-len", dest="min_contig_len",
+                      default=500, metavar="SIZE", type="int",
+                      help="Minumum contig SIZE [default: %default]")
+    parser.add_option("-c", "--contig-name", dest="contig_name",
+                      default=None, metavar="NAME", 
+                      help="Process contig with NAME [default: %default]")
+    parser.add_option("-k", "--num-processors", dest="num_processors",
+                      default=1, metavar="NUMBER", type="int",
+                      help="NUMBER of processors to use [default: %default]")
+    
+    
+    return parser.parse_args()
+
+def init(options):
+    ''' Validate the user-supplied command-line options and create outdirs
+        Returns nothing.  
+    '''
+    if options.num_processors > multiprocessing.cpu_count():
+        exit("Number of processors (%s) exceeds cpu count (%s)." % options.num_processors, multiprocessing.cpu_count);
+    
+    if not os.path.exists(options.input_dir):
+        exit("INPUTDIR does not exist.")
+    if not os.path.exists(options.input_dir + "/" + options.assembly):
+        exit("Assembly FILE does not exist.")
+    if not os.path.exists(options.output_dir):
+        try:
+            os.mkdir(options.output_dir)
+        except OSError:
+            exit("Cannot create OUTDIR.")
+    if not os.path.exists(options.output_dir + "/dzi"):
+        os.mkdir(options.output_dir + "/dzi")
+    if not os.path.exists(options.output_dir + "/dzi_2"):
+        os.mkdir(options.output_dir + "/dzi_2")
+    if not os.path.exists(options.output_dir + "/dzi_3"):
+        os.mkdir(options.output_dir + "/dzi_3")
+    if not os.path.exists(options.output_dir + "/json"):
+        os.mkdir(options.output_dir + "/json")
+    
+
+def create_scaffold_table(options):
+    ''' Create HTML table for scaffolds.
+    Returns HTML table (empty if no scaffolds).'''
+
+    scaffold_table = '<table id="scaffold_table"><tr>'\
+        '<td>Not available</td></tr></table>'
+    sys.stderr.write("Scaffold ... ")
+    num_scaffolds = 0
+    if options.scaffold and  \
+            os.path.exists(options.input_dir + "/" + options.scaffold):
+        scaffold_table = render.scaffold_table_header()
+        rows, num_scaffolds = assembly.make_scaffold_table(options)
+        for row in rows:
+           scaffold_table += render.scaffold_table_row(row)
+        scaffold_table += render.scaffold_table_footer()
+    else:
+        sys.stderr.write(" FILE: %s does not exist, skipping ... " % options.scaffold)
+    sys.stderr.write("done.\n")
+    return scaffold_table, num_scaffolds
+
+def create_image(options, contig, contig_statistic, read_status, otype, pair_status):
+    dzi_dir = '/dzi'
+    if otype == 'readnames': dzi_dir = '/dzi_2'
+    
+    if otype == 'templates': dzi_dir = '/dzi_3'
+    
+    xml, image_params = zoomtig.process_contig(contig,
+                                               options.output_dir + dzi_dir,
+                                               read_status, otype, pair_status, options.num_processors)
+    f = open(options.output_dir + dzi_dir + "/" +
+             contig.name + ".dzi", "w")
+    print >> f, xml
+    f.close()
+    
+    link = '<a href=\"contigo.html\" onclick=\"switchTo(event,\'dzi/%s.dzi\','\
+        '\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\');\" title="View Read Assembly for this Contig">'\
+        '%s</a>' % (contig_statistic.name, contig_statistic.name, 
+                    len(contig.quality), len(contig.consensus), 
+                    image_params['padded_start'], image_params['padded_end'], 
+                    image_params['max_depth'], image_params['height'], 
+                    image_params['ruler_height'], contig_statistic.name)
+    return link
+
+def create_image_2(options, contig, contig_statistic, read_status, otype, pair_status, pxbp):
+    dzi_dir = '/dzi_3'
+    print otype
+    
+    xml, image_params = zoomtig.process_contig_2(contig,
+                                                 options.output_dir + dzi_dir,
+                                                 read_status, otype, pair_status, pxbp)
+    f = open(options.output_dir + dzi_dir + "/" +
+             contig.name + ".dzi", "w")
+    print >> f, xml
+    f.close()
+    
+    link = '<a href=\"contigo.html\" onclick=\"switchTo(event,\'dzi/%s.dzi\','\
+        '\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\');\" title="View Read Assembly for this Contig">'\
+        '%s</a>' % (contig_statistic.name, contig_statistic.name, 
+                    len(contig.quality), len(contig.consensus), 
+                    image_params['padded_start'], image_params['padded_end'], 
+                    image_params['max_depth'], image_params['height'], 
+                    image_params['ruler_height'], contig_statistic.name)
+    return link
+
+
+def contig_json(options, contig):
+    of = open(options.output_dir + "/json/" + contig.name + ".json", "w")
+    print >> of, json.contig_data(contig)
+    of.close()
+    
+def assembly_json(options, asm, num_scaffolds):
+    of = open(options.output_dir + "/json/assembly.js", "w")
+    print >> of, "var CONTIGO = {};"
+    print >> of, "CONTIGO.default_segment_width = %s;" % (zoomtig.DEFAULT_SEGMENT_WIDTH,)
+    print >> of, "CONTIGO.num_scaffolds = %s;" % (num_scaffolds,)
+    print >> of, json.contig_statistics(asm)
+    of.close()
+
+
+def reads_to_taffydb(options, contig):
+    
+    r = re.compile('(["\'\\\\/])', re.VERBOSE)
+    asm_width = contig.end - contig.start
+    of = []
+    # Added by VF on 25/01/2010. Skip computing this method ...
+    return (asm_width / zoomtig.DEFAULT_SEGMENT_WIDTH) + 1
+    for i in range(0, (asm_width / zoomtig.DEFAULT_SEGMENT_WIDTH) + 1):
+        f = open(options.output_dir + "/json/" + contig.name + "_" + str(i) + "_reads.json", "w")
+        print >> f, '(['
+        of.append(f)
+    for i, read in enumerate(contig.reads.values()):
+
+        ss = (read.padded_start - contig.start) / zoomtig.DEFAULT_SEGMENT_WIDTH
+        se = (read.padded_end - contig.start) / zoomtig.DEFAULT_SEGMENT_WIDTH
+        s = '{'
+        s += 'name:"%s",' % (r.sub("\\\\\g<1>", read.name),)
+        s += 'sequence:"%s",' % (read.sequence,)
+        s += 'padded_start:"%s",' % (read.padded_start,)
+        s += 'padded_length:"%s"' % (read.padded_length(),)
+        s += '}'
+        if i < contig.num_reads: s += ','
+        
+        for j in range(ss, (se+1)):
+            print >> of[j], s
+    
+    for f in of:
+        print >> f, '])'
+        f.close()
+    return (asm_width / zoomtig.DEFAULT_SEGMENT_WIDTH) + 1
+
+################
+# MAIN PROGRAM #
+################
+
+def main():
+    
+    (options, args) = parse_options()
+    init(options)
+    scaffold_table, num_scaffolds = create_scaffold_table(options)
+    read_status = status.process_readstatus(options)
+    pair_status = status.process_pairstatus(options)
+
+    asm = assembly.Assembly()
+    asm.update_pair_statistics(pair_status)
+    
+    contig_table = render.contig_table_header()
+    
+    asm.pxbp = zoomtig.SMALL_FONT_WIDTH
+    if asm.num_templates > 0:
+        asm.pxbp = 500/asm.avg_insert_size
+    c = 0
+    print "%s/%s" % (options.input_dir, options.assembly)
+    for contig in assembly.load_ace(options.input_dir + "/" +
+                                    options.assembly, options.platform):
+        
+        sys.stderr.write("%s %s %s " % (contig.name, len(contig.consensus), contig.num_reads))
+        c += 1
+
+        #process_contig = False
+        # 
+
+        #if contig.name == 'contig00096':
+        #    process_contig = True
+        #if contig.name == 'contig00135':
+        #    break
+        #if process_contig:
+        #    pass
+        #else:
+        #    continue
+        #if c == 90:
+        #    break
+        # if not(contig.name in ('contig00008'): continue
+        # if contig.name != 'contig00001': continue
+        
+        # sys.stderr.write("HERE\n")
+        
+        # if c in range(60,100):
+        #    pass
+        #else:
+        #    continue
+
+        #if contig.name in ('contig00105'):
+        #    continue
+
+        # if contig.length() > 10000: continue
+
+        # if c == 90: break
+        
+        if options.contig_name and (options.contig_name != contig.name):
+            sys.stderr.write(" Skipping\n")
+            continue
+
+        if contig.length() < options.min_contig_len:
+            sys.stderr.write (" ... skipping, length < %s" % (options.min_contig_len,))
+            sys.stderr.write("\n")    
+            continue
+        
+        contig_statistic = assembly.ContigStatistic(
+            contig.name, contig.length(), contig.num_reads,
+            contig.base_counts(), contig.depth_histogram(),
+            contig.qual_histogram(), contig.low_qual_count(),
+            contig.read_length_histogram()
+            )
+        
+        contig_statistic.add_read_stats(*(contig.read_stats()))
+        if False:
+            sys.stderr.write(" %s\t%s\t%s\t%s\t%0.2f\t%s\t%0.2f\t%s\n" % (contig.name,
+                                                                          contig.length(), 
+                                                                          len(contig.reads),
+                                                                          contig_statistic.avg_depth(),
+                                                                          contig_statistic.avg_ins_size(),
+                                                                          contig_statistic.med_ins_size(),
+                                                                          contig_statistic.avg_paired_depth(),
+                                                                          contig_statistic.med_paired_depth()
+                                                                          ))
+        asm.contig_statistics.append(contig_statistic)
+        link = contig.name
+        #sys.stderr.write("I")
+        if not options.noimage:
+            link = create_image(options, contig, contig_statistic, read_status, 'assembly', pair_status)
+            link_2 = create_image(options, contig, contig_statistic, read_status, 'readnames', pair_status)
+            # link_3 = create_image_2(options, contig, contig_statistic, read_status, 'templates', pair_status, asm.pxbp)
+        else:
+            contig.start, contig.end = zoomtig.adjust_contig_coordinates(contig.reads)
+
+        #sys.stderr.write("R")
+        contig_statistic.num_segments = reads_to_taffydb(options, contig)
+        #sys.stderr.write("J")
+        contig_json(options, contig)
+        
+        contig_table += render.contig_table_row(contig_statistic, link)
+        sys.stderr.write("\n")
+    contig_table += render.contig_table_footer()
+    update_interface(options, contig_table, scaffold_table)
+    assembly_json(options, asm, num_scaffolds)
+    sys.stderr.write("done ... output in %s\n" % (options.output_dir))
+    
+if __name__ == '__main__':
+    main()

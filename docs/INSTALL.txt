@@ -1,0 +1,15 @@
+Contigo -- a program to visualize genome assemblies in a web browser
+====================================================================
+
+CONTENTS
+--------
+/A SUMMARY
+/B SYSTEM REQUIRMENTS
+/C SOFTWARE REQUIREMENTS
+/D SETUP
+/E AUTHOR
+
+
+/E AUTHOR
+Written by Vince Forgetta.
+Contact: vincenzo.forgetta at mail.mcgill.ca

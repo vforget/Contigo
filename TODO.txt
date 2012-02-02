@@ -1,0 +1,21 @@
+TODO
+====
+
+Documentation:
+ * Migrate notebook to TODO
+ * Write README.
+ * Write INSTALL.
+ * Write LICENCE.
+ * Write COPYING.
+ * Write help webpage.
+
+Bugs:
+
+Features:
+
+Minor Fixes:
+ * Add Seadragon images to interface? Stored in old/images directory.
+ * Delete old fonts.
+ * Deprecated scripts in lib/?
+ * Deprecated resources in static/?
+ * Deprecated resources in templates/?

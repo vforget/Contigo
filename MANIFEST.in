@@ -1,0 +1,5 @@
+graft docs
+graft bin
+include *.txt
+graft contigo/static
+global-exclude *~

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Contigo - ASSEMBLY_NAME</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link href="layout.css" rel="stylesheet" type="tex/css"></link>
+<link rel="stylesheet" type="text/css" href="styles/contigo.css">
+<link rel="stylesheet" type="text/css" href="js/tableFilter/includes/tableFilter.css">
+<link rel="stylesheet" type="text/css" href="js/tableFilter/includes/tableFilter.aggregator.css">
+
+<!--[if IE]><script language="javascript" type="text/javascript" src="../excanvas.pack.js"></script><![endif]-->
+
+<link type="text/css" href="jquery-ui/themes/base/ui.all.css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript">
+  $("#progress").css({ 'color': 'white', 'background-color': 'red' });
+  $("#progress").html("&nbsp;LOADING&nbsp;");
+</script>
+
+
+<script type="text/javascript" src="js/taffy-min.js"></script>
+
+<script type="text/javascript" src="js/tableFilter/_dist/jquery.cookies-packed.js"></script>
+<script type="text/javascript" src="js/tableFilter/_dist/prototypes-packed.js"></script>
+<script type="text/javascript" src="js/tableFilter/_dist/json-packed.js"></script>
+<script type="text/javascript" src="js/tableFilter/_dist/jquery.truemouseout-packed.js"></script>
+<script type="text/javascript" src="js/tableFilter/_dist/daemachTools-packed.js"></script>
+<script type="text/javascript" src="js/tableFilter/_dist/jquery.tableFilter-packed.js"></script>
+<script type="text/javascript" src="js/tableFilter/_dist/jquery.tableFilter.aggregator-packed.js"></script>
+<script type="text/javascript" src="js/tableFilter/_dist/jquery.tableFilter.columnStyle-packed.js"></script>
+
+<script type="text/javascript" src="js/flot/jquery.flot.js"></script>
+<script type="text/javascript" src="js/seadragon-min.js"></script>
+
+<script type="text/javascript" src="jquery-ui/ui/ui.core.js"></script>
+<script type="text/javascript" src="jquery-ui/ui/ui.tabs.js"></script>
+
+<!--
+<script type="text/javascript" src="js/ui.core.js"></script>
+<script type="text/javascript" src="js/ui.tabs.js"></script>
+-->
+  
+<script type="text/javascript">
+  $(document).ready(function(){
+//      $('#contig_table').eq(0).tableFilter();
+      $('#contig_table').tableFilter({pageLength:10, imagePath: "js/tableFilter/images/icons"});
+      $('#scaffold_table').tableFilter({pageLength:10, imagePath: "js/tableFilter/images/icons"});
+
+      xy_chart($('#xy_chart_x').val(), $('#xy_chart_y').val());
+      m_chart($('#m_chart_cat').val());
+      h_chart($('#h_chart_cat').val());
+      $('#xy_chart_x option').click(function(){ xy_chart($('#xy_chart_x').val(), $('#xy_chart_y').val()); });
+      $('#xy_chart_y option').click(function(){ xy_chart($('#xy_chart_x').val(), $('#xy_chart_y').val()); });
+      $('#m_chart_cat option').click(function(){ m_chart($('#m_chart_cat').val()); });
+      $('#h_chart_cat option').click(function(){ h_chart($('#h_chart_cat').val()); });
+    
+      $('#num_contigs').html(CONTIGO.num_contigs);
+      $('#num_scaffolds').html(CONTIGO.num_scaffolds);
+      $('#num_reads').html(CONTIGO.num_reads);
+      $('#avg_read_depth').html(CONTIGO.avg_depth);
+      $('#avg_paired_depth').html(CONTIGO.avg_paired_depth);
+      $('#avg_ins_size').html(CONTIGO.avg_ins_size);
+      $('#stddev_ins_size').html(CONTIGO.stddev_ins_size);
+      $('#num_paired').html(CONTIGO.num_paired);
+      $('#num_link').html(CONTIGO.num_link);
+      $('#num_unmapped').html(CONTIGO.num_unmapped);
+      $('#num_false').html(CONTIGO.num_false);
+      $('#num_multiple').html(CONTIGO.num_multiple);
+      $('#num_half').html(CONTIGO.num_half);
+      $('#num_templates').html(CONTIGO.num_templates);
+      $('#assembled_bases').html(CONTIGO.assembled_bases);
+      $('#avg_gc').html(CONTIGO.avg_gc);
+      $('#avg_read_length').html(CONTIGO.avg_read_length);
+      $('#median_read_length').html(CONTIGO.median_read_length);
+
+      $("#table_tabs").tabs();
+      $("#chart_tabs").tabs();
+      $("#progress").css({ 'color':'white', 'background-color':'#070' });
+      $("#progress").html("&nbsp;READY&nbsp;");
+  });
+  
+  </script>
+</head>
+
+<body>
+<div id="banner">
+<a href="contigo.html" title="Reload this page">
+<span style="font-size: 1.4em; font-family: Verdana, sans-serif; font-weight: normal; color: black;">
+conti<span style="color: #FF0000;">go</span></span>
+</a>
+<br/>
+<span style="font-size:0.6em; color: #999; font-family: Verdana, sans-serif;">Assembly Viewer</span>
+</span>
+</div>
+
+
+<div id="stats"><span class="stat_label" style="font-weight: bold;">ASSEMBLY_NAME</span><span class="stat_label"> assembly</span> - 
+<span id="assembled_bases" class="assembly_stat_val">?</span> Bases Assembled into
+<span id="num_contigs" class="assembly_stat_val">?</span> Contigs 
+(<span id="num_scaffolds" class="assembly_stat_val">?</span> Scaffolds) at
+<span id="avg_read_depth" class="assembly_stat_val">?</span>x Depth and 
+<span id="avg_gc" class="assembly_stat_val">?</span> %GC.
+<br/>
+<span class="stat_label">Reads</span> - 
+<span id="num_reads"  class="assembly_stat_val">?</span> w/ Median Length of <span id="median_read_length"  class="assembly_stat_val">?</span> nt (Avg. <span id="avg_read_length"  class="assembly_stat_val">?</span> nt)
+<br/>
+<span class="stat_label">Templates</span> - <span id="num_templates" class="assembly_stat_val">?</span> templates: 
+<span id="num_paired" class="assembly_stat_val">?</span> consistent (<span id="avg_ins_size" class="assembly_stat_val">?</span> &plusmn; <span id="stddev_ins_size" class="assembly_stat_val">?</span> Kb, 
+<span id="avg_paired_depth" class="assembly_stat_val">?</span>x),
+<span id="num_link" class="assembly_stat_val">?</span> Link,
+<span id="num_half" class="assembly_stat_val">?</span> &frac12,
+<span id="num_multiple" class="assembly_stat_val">?</span> Multi,
+<span id="num_unmapped" class="assembly_stat_val">?</span> Unmap,
+<span id="num_false" class="assembly_stat_val">?</span> False
+<br/>
+<span class="stat_label">Download</span> - FASTA: Contig <a href="contigo.html" onclick="downloadFasta(event); return false;" title="View all contig sequences in FASTA format">Sequences</a>, <a href="contigo.html" onclick="downloadQuality(event); return false;" title="View all contig qualities in FASTA format">Qualities</a>.
+ Tables: <a href="contigo.html" onclick="downloadContigTable(event); return false;" title="View Contig Table in Tab-delimited format">Contig<a></span>
+</div>
+<div id="links" style="font-size:0.6em; color: white; font-family: Verdana, sans-serif;">
+<a href="help.html" title="Visit the Help Page"><img src="help_30.png" alt="help"></a><br/>
+<span id="progress" style="color: white; background-color: red; font-family: Verdana, sans-serif;" title="Status of interface"> LOADING </span>
+</div>
+
+<div style="clear: both;"></div>
+
+<div id="content">
+
+<div id="table_tabs">
+    <ul>
+        <li><a href="#contig_table_box" title="Table w/ Contig Statistics"><span>Contigs</span></a></li>
+        <li><a href="#scaffold_table_box" title="Table w/ Scaffold Statistics"><span>Scaffolds</span></a></li>
+	<li><a href="#tool_box" title="Assembly Tools e.g. Read Fetcher"><span>Tools</span></a></li>
+    </ul>
+    <div id="contig_table_box" class="table_box">
+    CONTIG_TABLE_HTML
+    </div>
+    <div id="scaffold_table_box" class="table_box">
+    SCAFFOLD_TABLE_HTML 
+    </div>
+    <div id="tool_box" class="table_box">
+      <b>Read Fetcher</b>:<br/>Contig <input type="text" id="rf_contig_name" name="rf_contig_name"/> from
+      <input type="text" id="rf_contig_start" name="rf_contig_start"/> to
+      <input type="text" id="rf_contig_end" name="rf_contig_end"/><br/> Read type:
+      <INPUT name="rf_read_type" type="checkbox" value="wgs"> WGS
+	<INPUT name="rf_read_type" type="checkbox" value="paired"> Paired
+	  <INPUT name="rf_read_type" type="checkbox" value="gap"> Gap
+	    <INPUT name="rf_read_type" type="checkbox" value="single"> Single
+	      
+      <hr/>
+    </div>
+</div>
+
+
+<div id="chart_tabs">
+    <ul>
+        <li><a href="#chart1" title="Plot the Comparison of Two Contig Statistics Values"><span>Scatter</span></a></li>
+        <li><a href="#chart2" title="Plot Cummulative Number of Assembled Bases Per Contig Statistic Value"><span>Cummulative</span></a></li>
+        <li><a href="#chart3" title="Plot the Number of Assembled Bases Per Contig Statistic Value"><span>Counts</span></a></li>
+    </ul>
+    <div id="chart1">
+    <select id="xy_chart_x" class="chart_menu" title="Refresh plot for a Contig Statistic along the x-axis">
+    <option selected="selected" value="length">Contig Length</option>
+    <option value="avg_gc">GC Content</option>
+    <option value="avg_depth">Read Depth</option>
+    <option value="avg_ins_size">Ins. Size (Kb)</option>
+    <option value="avg_paired_depth">Templ. Depth</option>
+    </select> v.
+    <select id="xy_chart_y" class="chart_menu" title="Refresh plot for a Contig Statistic along the y-axis">
+    <option value="length">Contig Length</option>
+    <option value="avg_gc">GC Content</option>
+    <option value="avg_ins_size">Ins. Size (Kb)</option>
+    <option value="avg_paired_depth">Templ. Depth</option>
+    <option selected="selected" value="avg_depth">Read Depth</option>
+    </select>
+    <div id="xy_chart" class="chart"><em>Select axes from menus above</em></div>
+    <span id="xy_chart_detail"></span>
+    </div>
+    
+    <div id="chart2">
+    <select id="m_chart_cat" class="chart_menu" title="Refresh plot for the selected Contig Statistic">
+    <option selected="selected" value="length">Contig Length</option>
+    <option value="avg_gc">GC Content</option>
+    <option value="avg_depth">Read Depth</option>
+    <option value="avg_paired_depth">Paired Read Depth</option>
+    </select>
+    <div id="m_chart" class="chart"><em>Select axes from menus above</em></div>
+    <span id="m_chart_detail"></span>
+    </div>
+    <div id="chart3">
+    <select id="h_chart_cat" class="chart_menu" title="Refresh plot for the selected Contig Statistic">
+    <option selected="selected" value="quality">Base Quality</option>
+    <option value="avg_depth">Read Depth</option>
+    <option value="read_length">Read Length</option>
+    <option value="avg_paired_depth">Paired Depth</option>
+    </select>
+    <div id="h_chart" class="chart"><em>Select axes from menus above</em></div>
+    <span id="h_chart_detail"></span>
+
+    </div>
+</div>
+<div style="clear: both;"></div>
+<div id="zoomtig_area">
+
+<div id="zoomtig_header">
+Viewing <span id="contig_viewed"><em>(To view a contig, click on its name in the contig table above)</em></span> -- Mouse at: col= <span id="contig_pos">?</span>, row= <span id="contig_depth">?</span>. Viewing <span id="contig_window_size">?</span> cols
+</div>
+
+<div id="zoomtig"></div>
+</div>
+
+</div>
+<script type="text/javascript" >var CONTIGO = {};</script>
+<script type="text/javascript" src="json/assembly.js"></script>
+<script type="text/javascript" src="js/contigo.js"></script>
+<script type="text/javascript" src="js/zoomtig.js"></script>
+<script type="text/javascript" src="js/download.js"></script>
+<div id="footer">
+<span>Date created: DATE_CREATED</span>, <span><a href="disclaimer.html" title="View Copyright and Disclaimer">&copy; Vince Forgetta, 2009</a></span>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,279 @@
+/* top right bottom left */
+#wait {
+    position: absolute;
+    text-align: center;
+    border: 1px none black;
+    background: white;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    background-color:#000000;
+    opacity:0.6;
+}
+#wait p {
+   text-align: center;
+   position: absolute;
+   top: 50%;
+   left: 30%;
+   color: #ff0000;
+   font-size: 3em;
+   font-family: Verdana;
+   opacity: 100;
+   z-index: 200;
+}
+
+.assembly_stat_val {
+    font-weight: bold;
+}
+
+#xy_chart_detail { border: 1px solid #CCC; background-color: white; padding: 2px; width: 200px; }
+#m_chart_detail { border: 1px solid #CCC; background-color: white; padding: 2px; width: 200px; }
+#h_chart_detail { border: 1px solid #CCC; background-color: white; padding: 2px; width: 200px; }
+.chart{ width: 260px; height: 190px; margin: 5px; }
+.tickLabel { font-size: 1em; font-family: Verdana; }
+.chart_menu { font-family: Verdana; font-size: 1.0em }
+.chart_area { border: 0px solid black; padding: 10px 10px 0px 10px; font-family: Verdana; font-size: 1em; }
+.help { color: #888; font-weight: bold; }
+
+
+#chart_group{ 
+  width: 315px;
+  height: 800px;
+  background-color: #FFFFEE;
+  border-width: 0px 1px 0px 0px;
+  border-style: none dotted none none;
+  border-color: black;
+  float:left;  display: inline;
+  text-align: center; 
+  font-family: Verdana; font-size: 0.65em;
+}
+#contig_table_area { 
+  font-family: Verdana; font-size: 0.65em;
+  height: 800px; width: 350px;
+  border-width: 0px 1px 0px 0px;
+  border-style: none dotted none none;
+  border-color: black;
+  overflow: auto;
+  float:left;  display: inline;
+  background-color: #FFFFEE;
+}
+
+.offColor {
+	background-color:#FFFFFF;
+}
+#contig_table_area table td {
+  font-family: Verdana;
+  width: 20%;
+}
+#assembly_stats { 
+ text-align: center;
+ color: white;
+ background-color: #880000;
+ padding: 5px;
+ border: 1px none black;
+ margin: 10px; font-weight: normal;
+}
+#contig_table_head { 
+ text-align: center;
+ color: white;
+ background-color: #888800;
+ padding: 5px;
+ border: 1px none black;
+ margin: 10px; font-weight: normal;
+}
+
+#contig_assembly_head { 
+ text-align: center;
+ color: white;
+ background-color: #800080;
+ padding: 5px;
+ border: 1px none black;
+ margin: 10px;
+ font-weight: normal;
+ width: 600px;
+}
+
+#contig_assembly_pic {
+  border: 1px solid #CCC;
+  height: 740px;
+  width: 600px;
+  margin: 10px;
+  padding: 5px;
+  background-color: #333;
+  
+}
+
+.assembly_charts {
+ text-align: center;
+ color: white;
+ background-color: #008888;
+ padding: 5px;
+ border: 1px none black;
+ margin: 10px;
+ font-weight: normal;
+}
+
+#contig_assembly { font-family: Verdana; font-size: 0.65em; height: 800px; width: 630px; float:left;  display: inline; background-color: #FFFFEE; }
+#banner a:link { text-decoration: none; color: white; }
+#banner a:visited { text-decoration: none; color: white; }
+#banner a:hover { text-decoration: none; color: red; }
+#banner a:active { text-decoration: none; color: white; }
+
+#links a:link { text-decoration: none; color: white; }
+#links a:visited { text-decoration: none; color: white; }
+#links a:hover { text-decoration: none; color: red; }
+#links a:active { text-decoration: none; color: white; }
+
+
+.ts_links a:link { text-decoration: none; color: white; }
+.ts_links a:visited { text-decoration: none; color: white; }
+.ts_links a:hover { text-decoration: none; color: white; }
+.ts_links a:active { text-decoration: none; color: white; }
+
+body {
+    background-color: white; 
+    margin: 0px 0px 0px 10px; 
+    padding: 0px; 
+    width: 920px; 
+    height: 100%
+
+}
+
+#banner {
+   border: solid 1px white;
+   padding: 0px;
+   width: 100px;
+   height: 50px;
+   float: left;
+   display: table-cell;
+   vertical-align: middle;
+   text-align: center;
+}
+
+#stats {
+   border: solid 1px white;
+   border-color: white white white #c9d7f1;
+   width: 738px;
+   height: 46px;
+   float: left;
+   color: black;
+   background-color: white;
+   font-size:0.6em; color: black; font-family: Verdana, sans-serif;
+   padding: 2px 10px 2px 10px;
+}
+
+#links {
+   border: solid 1px white;
+   border-color: white white white #c9d7f1;
+   padding: 0px;
+   width: 50px;
+   height: 50px;
+   float: left;
+   display: table-cell;
+   vertical-align: middle;
+   text-align: center;
+}
+
+#links img {
+  width: 30px;
+  height: 30px;
+  border: 0px;
+  padding: 2px 10px 2px 10px;
+}
+
+#zoomtig_area {
+   border: 1px solid;
+   border-color: #c9d7f1;
+   background-color: #eee;
+   width: 916px;
+   height: 400px; 
+   font-size:0.6em; color: black; font-family: Verdana, sans-serif; text-align: center;
+}
+
+#zoomtig_header {
+    width: 914px;
+    height: 15px; 
+    border: 1px solid;
+    border-color: white;
+}
+
+#contig_pos, #contig_depth, #contig_window_size {
+    font-weight: bold;
+}
+
+#zoomtig {
+   border: 1px solid;
+   border-color: white;
+   width: 914px;
+   height: 380px; 
+   background-color: white;
+   font-size:0.6em; color: black; font-family: Verdana, sans-serif; text-align: center;
+}
+
+.headers { padding: 2px 0px 2px 0px; width: 100%; background-color: white; color: black; }
+#content { border: 0px black solid; background-color: #ffffff; width: 918px; height: 100%; }
+#footer { font-size:0.6em; color: #999; font-family: Verdana, sans-serif; text-align: center;}
+
+#footer a:link { text-decoration: underline; color: #999; }
+#footer a:visited { text-decoration: underline; color: #999; }
+#footer a:hover { text-decoration: underline; color: #999; }
+#footer a:active { text-decoration: underline; color: #999; }
+
+#chart_tabs { 
+   border: solid 1px;
+   border-color: #c9d7f1;
+   margin: 2px 0px 2px 2px;
+   width: 308px;
+   height: 300px;
+   padding: 2px;
+   background-color: white;
+   float: left;
+   font-size:0.6em; color: black; font-family: Verdana, sans-serif; text-align: center; 
+}
+#table_tabs { 
+    border: solid 1px;
+    border-color: #c9d7f1;
+    width: 595px;
+    height: 300px;
+    padding: 2px;
+    margin: 2px 0px 2px 0px;
+    background-color: white;
+    float: left;
+    font-size:0.6em; color: black; font-family: Verdana, sans-serif; text-align: center; 
+}
+
+.table_box {
+    width: 565px;
+    height: 255px;
+    overflow: auto;
+    padding: 2px;
+}
+
+#contig_table {
+  border: 0px solid black;  
+  width: 560px;
+  /*height: 260px;*/
+  table-layout:fixed;
+  text-align: center;
+  
+}
+#scaffold_table {
+  border: 0px solid black;
+  width: 560px;
+  /*height: 260px;*/
+  table-layout:fixed;
+  text-align: center;
+}
+
+
+#tool_box {
+    text-align: left;
+}
+
+.stat_label {
+    color: #C00;
+    font-weight: normal;
+}
+
