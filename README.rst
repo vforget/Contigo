@@ -1,11 +1,13 @@
-====================================================================
-Contigo -- a program to visualize genome assemblies in a web browser
-====================================================================
+=======
+Contigo
+=======
 
 CONTENTS
 --------
 
 /A SUMMARY
+
+Contigo is a program that visualizes genome assemblies in a web browser. 
 
 /B USAGE
 
