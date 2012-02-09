@@ -6,10 +6,10 @@ setup(
     author="Vince Forgetta",
     author_email="vincenzo.forgetta@mail.mcgill.ca",
     packages=['contigo'],
-    scripts=['bin/contigo.py'],
+    scripts=['bin/contigo'],
     url='https://github.com/vforget/contigo',
     license='LICENCE.txt',
     description='Web-based assembly viewer.',
     long_description=open('README.txt').read(),
-    install_requires=['PIL'],
+    requires=['PIL']
 )
