@@ -23,7 +23,6 @@ How's it made?
 def html_footer():
     return " TEXT "
 
-
 def interface(of, options, contig_table, scaffold_table):
     html = open(HTML_DIR + "template.html").read()
     html = html.replace("CONTIG_TABLE_HTML", contig_table)
