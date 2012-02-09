@@ -14,6 +14,7 @@ import datetime
 import multiprocessing
 
 sys.path.append("/home/vforget/Dropbox/Contigo")
+
 from contigo import *
 STATIC_DIR = sys.path[0] + "/../contigo/static/"
 
