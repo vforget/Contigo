@@ -14,8 +14,9 @@ Bugs:
 Features:
 
 Minor Fixes:
- * Add Seadragon images to interface? Stored in old/images directory.
- * Delete old fonts.
- * Deprecated scripts in lib/?
- * Deprecated resources in static/?
- * Deprecated resources in templates/?
+ * Delete paired-end features:
+   - colums in table
+   - data in summary
+   - entries in pulldown.
+   - template view in zoom
+ * Consider removing read downloading functionality?
