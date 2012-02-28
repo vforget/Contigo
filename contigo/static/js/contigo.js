@@ -97,12 +97,20 @@ function xy_chart(x_cat, y_cat) {
     };
     $.plot($("#xy_chart"), [{ data: d1, 
                               points: { show: true, radius: 0.5},
-                             shadowSize: 0,
-                             colors: ["#000"]
+                              shadowSize: 0,
+                              colors: ["#000"]
                            }                              
                           ],
                           options
       );
+    
+/*
+    plot = $.plot($("#xy_chart"), d1,
+              $.extend(true, {}, options, {
+                  xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to },
+		  yaxis: { min: ranges.yaxis.from, max: ranges.yaxis.to }
+              }));
+*/
   
 }
 
@@ -129,10 +137,12 @@ $("#xy_chart").bind("plotclick", function (event, pos, item) {
 
 
 $("#xy_chart").bind("plotselected", function(event, ranges) {
+
     var x_cat = $('#xy_chart_x').val();
     var y_cat = $('#xy_chart_y').val();
     var x_txt = $('#xy_chart_x :selected').text();
     var y_txt = $('#xy_chart_y :selected').text();
+
     
     var x1_val = ranges.xaxis.from;
     var x2_val = ranges.xaxis.to;
@@ -153,6 +163,8 @@ $("#xy_chart").bind("plotselected", function(event, ranges) {
     y2_val = Math.round(y2_val);
     
     alert(x_txt + ": " + x1_val + "-" + x2_val + " (" + (x2_val-x1_val) + "), " + y_txt + ": " + y1_val + "-" + y2_val + " (" + (y2_val-y1_val) + ")");
+   
+
 });
 
 function m_chart(cat){
