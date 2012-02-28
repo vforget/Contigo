@@ -46,12 +46,14 @@ def contig_table_header():
 <tr class="header">
 <td>Contig</td>
 <td>Length</td>
-<td>No.<br/>Reads</td>
-<td>Read<br/>Depth</td>
+<td>Read Count</td>
+<td>Read Depth</td>
 <td>%&lt;Q64</td>
 <td>%GC</td>
+<!--
 <td>Templ.<br/>Depth</td>
 <td>Avg.<br/>Insert</td>
+-->
         </tr>"""
     return s
     
@@ -68,9 +70,9 @@ def contig_table_row(contig_statistic, link):
         '<a href="contigo.html" onclick="loadQuality(\'%s\'); return false;" title="View Contig Qualities FASTA format">%0.2f</a>' % (contig_statistic.name, contig_statistic.perc_lowqual(),),
         ("%0.2f" % contig_statistic.perc_gc())])
     s += "</td>"
-    s += "<td>%0.2f</td><td>%0.2f</td>" % (contig_statistic.avg_paired_depth(), \
-                                           contig_statistic.avg_ins_size()/1000
-                                           )
+    #s += "<td>%0.2f</td><td>%0.2f</td>" % (contig_statistic.avg_paired_depth(), \
+    #                                       contig_statistic.avg_ins_size()/1000
+    #                                       )
     s += "</tr>\n"
     return s
 

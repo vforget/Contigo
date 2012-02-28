@@ -334,7 +334,7 @@ def main():
         else:
             contig.start, contig.end = zoomtig.adjust_contig_coordinates(contig.reads)
 
-        sys.stderr.write("READS TO TAFFY\n")
+        #sys.stderr.write("READS TO TAFFY\n")
         contig_statistic.num_segments = reads_to_taffydb(options, contig)
         #sys.stderr.write("J")
         contig_json(options, contig)
