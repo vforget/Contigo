@@ -101,13 +101,14 @@ conti<span style="color: #FF0000;">go</span></span>
 <div id="stats"><span class="stat_label" style="font-weight: bold;">ASSEMBLY_NAME</span><span class="stat_label"> assembly</span> - 
 <span id="assembled_bases" class="assembly_stat_val">?</span> Bases Assembled into
 <span id="num_contigs" class="assembly_stat_val">?</span> Contigs 
-(<span id="num_scaffolds" class="assembly_stat_val">?</span> Scaffolds) at
+<!--(<span id="num_scaffolds" class="assembly_stat_val">?</span> Scaffolds)--> at
 <span id="avg_read_depth" class="assembly_stat_val">?</span>x Depth and 
 <span id="avg_gc" class="assembly_stat_val">?</span> %GC.
 <br/>
 <span class="stat_label">Reads</span> - 
 <span id="num_reads"  class="assembly_stat_val">?</span> w/ Median Length of <span id="median_read_length"  class="assembly_stat_val">?</span> nt (Avg. <span id="avg_read_length"  class="assembly_stat_val">?</span> nt)
 <br/>
+<!--
 <span class="stat_label">Templates</span> - <span id="num_templates" class="assembly_stat_val">?</span> templates: 
 <span id="num_paired" class="assembly_stat_val">?</span> consistent (<span id="avg_ins_size" class="assembly_stat_val">?</span> &plusmn; <span id="stddev_ins_size" class="assembly_stat_val">?</span> Kb, 
 <span id="avg_paired_depth" class="assembly_stat_val">?</span>x),
@@ -117,6 +118,7 @@ conti<span style="color: #FF0000;">go</span></span>
 <span id="num_unmapped" class="assembly_stat_val">?</span> Unmap,
 <span id="num_false" class="assembly_stat_val">?</span> False
 <br/>
+-->
 <span class="stat_label">Download</span> - FASTA: Contig <a href="contigo.html" onclick="downloadFasta(event); return false;" title="View all contig sequences in FASTA format">Sequences</a>, <a href="contigo.html" onclick="downloadQuality(event); return false;" title="View all contig qualities in FASTA format">Qualities</a>.
  Tables: <a href="contigo.html" onclick="downloadContigTable(event); return false;" title="View Contig Table in Tab-delimited format">Contig<a></span>
 </div>
@@ -132,12 +134,15 @@ conti<span style="color: #FF0000;">go</span></span>
 <div id="table_tabs">
     <ul>
         <li><a href="#contig_table_box" title="Table w/ Contig Statistics"><span>Contigs</span></a></li>
-        <li><a href="#scaffold_table_box" title="Table w/ Scaffold Statistics"><span>Scaffolds</span></a></li>
+        <!--
+	<li><a href="#scaffold_table_box" title="Table w/ Scaffold Statistics"><span>Scaffolds</span></a></li>
 	<li><a href="#tool_box" title="Assembly Tools e.g. Read Fetcher"><span>Tools</span></a></li>
+	-->
     </ul>
     <div id="contig_table_box" class="table_box">
     CONTIG_TABLE_HTML
     </div>
+    <!--
     <div id="scaffold_table_box" class="table_box">
     SCAFFOLD_TABLE_HTML 
     </div>
@@ -152,13 +157,14 @@ conti<span style="color: #FF0000;">go</span></span>
 	      
       <hr/>
     </div>
+    -->
 </div>
 
 
 <div id="chart_tabs">
     <ul>
         <li><a href="#chart1" title="Plot the Comparison of Two Contig Statistics Values"><span>Scatter</span></a></li>
-        <li><a href="#chart2" title="Plot Cummulative Number of Assembled Bases Per Contig Statistic Value"><span>Cummulative</span></a></li>
+        <li><a href="#chart2" title="Plot Cumulative Number of Assembled Bases Per Contig Statistic Value"><span>Cumulative</span></a></li>
         <li><a href="#chart3" title="Plot the Number of Assembled Bases Per Contig Statistic Value"><span>Counts</span></a></li>
     </ul>
     <div id="chart1">
@@ -166,14 +172,18 @@ conti<span style="color: #FF0000;">go</span></span>
     <option selected="selected" value="length">Contig Length</option>
     <option value="avg_gc">GC Content</option>
     <option value="avg_depth">Read Depth</option>
+    <!--
     <option value="avg_ins_size">Ins. Size (Kb)</option>
     <option value="avg_paired_depth">Templ. Depth</option>
+    -->
     </select> v.
     <select id="xy_chart_y" class="chart_menu" title="Refresh plot for a Contig Statistic along the y-axis">
     <option value="length">Contig Length</option>
     <option value="avg_gc">GC Content</option>
+    <!--
     <option value="avg_ins_size">Ins. Size (Kb)</option>
     <option value="avg_paired_depth">Templ. Depth</option>
+    -->
     <option selected="selected" value="avg_depth">Read Depth</option>
     </select>
     <div id="xy_chart" class="chart"><em>Select axes from menus above</em></div>
@@ -185,7 +195,9 @@ conti<span style="color: #FF0000;">go</span></span>
     <option selected="selected" value="length">Contig Length</option>
     <option value="avg_gc">GC Content</option>
     <option value="avg_depth">Read Depth</option>
+    <!--
     <option value="avg_paired_depth">Paired Read Depth</option>
+    -->
     </select>
     <div id="m_chart" class="chart"><em>Select axes from menus above</em></div>
     <span id="m_chart_detail"></span>
@@ -195,7 +207,9 @@ conti<span style="color: #FF0000;">go</span></span>
     <option selected="selected" value="quality">Base Quality</option>
     <option value="avg_depth">Read Depth</option>
     <option value="read_length">Read Length</option>
+    <!--
     <option value="avg_paired_depth">Paired Depth</option>
+    -->
     </select>
     <div id="h_chart" class="chart"><em>Select axes from menus above</em></div>
     <span id="h_chart_detail"></span>

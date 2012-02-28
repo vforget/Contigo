@@ -12,9 +12,9 @@ function init_seadragon() {
     viewer.addEventListener("animation", showViewport);
     Seadragon.Utils.addEvent(viewer.elmt, "mousemove", showMouse);
     viewer.addControl(makeFetcherControl(), Seadragon.ControlAnchor.TOP_RIGHT);
-    viewer.addControl(makeAssemblyControl(), Seadragon.ControlAnchor.TOP_LEFT);
-    viewer.addControl(makeReadnameControl(), Seadragon.ControlAnchor.TOP_LEFT);
-    viewer.addControl(makeTemplateControl(), Seadragon.ControlAnchor.TOP_LEFT);
+//    viewer.addControl(makeAssemblyControl(), Seadragon.ControlAnchor.TOP_LEFT);
+//    viewer.addControl(makeReadnameControl(), Seadragon.ControlAnchor.TOP_LEFT);
+//    viewer.addControl(makeTemplateControl(), Seadragon.ControlAnchor.TOP_LEFT);
     viewer.addEventListener("open", onViewerOpen);
 }
 
