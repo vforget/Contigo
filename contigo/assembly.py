@@ -175,7 +175,9 @@ class Assembly:
             if sum_of_reads > (num_reads/2):
                 return k
         
-            
+    def perc_lowqual_range(self):
+        y = [x.perc_lowqual() for x in self.contig_statistics]
+        return min(y), max(y)
 
     
     def gc_range(self):

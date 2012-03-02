@@ -12,13 +12,14 @@ def assembly_chart_parameters():
         '{ "length": "Contig Length", "avg_gc": "GC Content", '\
         '"avg_depth": "Read Depth", "read_length": "Read Length",'\
         '"avg_ins_size": "Ins. Size", "avg_paired_depth": "Tmpl. Depth",'\
+        '"perc_low_qual": "Low Quality", "num_reads": "Read Count"'\
         '};'\
         ' CONTIGO.is_log = { "length": true, "avg_depth": true, '\
         '"avg_gc": false, "quality": false, "read_length": false, '\
-        '"avg_ins_size": false, "avg_paired_depth": false, "avg_paired_depth": false'\
+        '"perc_low_qual": false, "num_reads": false, "avg_ins_size": false, "avg_paired_depth": false, "avg_paired_depth": false'\
         '};'\
         ' CONTIGO.bin_sizes = { "length": 100, "avg_gc": 1, '\
-        '"avg_depth": 5, "avg_ins_size": 1, "avg_paired_depth": 1 };'
+        '"avg_depth": 5, "avg_ins_size": 1, "avg_paired_depth": 1, "perc_low_qual": 1, "num_reads": 5};'
 
 
 def build_contig_statistic(d):
@@ -27,6 +28,7 @@ def build_contig_statistic(d):
     s += '"avg_depth": %0.0f,' % d.avg_depth()
     s += '"avg_gc": %0.2f,' % d.perc_gc()
     s += '"perc_low_qual": %0.2f,' % d.perc_lowqual()
+    s += '"num_reads": %0.2f,' % d.num_reads
     s += '"avg_ins_size": %0.2f,' % (d.avg_ins_size(),)
     s += '"avg_paired_depth": %0.2f,' % (d.avg_paired_depth(),)
     s += '"dzi": "dzi/' + d.name + '.dzi"'
@@ -70,10 +72,10 @@ def contig_statistics(asm):
     s += "CONTIGO.median_read_length = %0.0f;" % asm.median_read_length()
     s += "CONTIGO.ranges = { max: { length: %s, "\
         "avg_depth: %s, avg_gc: %s, quality: %s, read_length: %s, "\
-        "avg_ins_size: %s, avg_paired_depth: %s}, "\
+        "avg_ins_size: %s, avg_paired_depth: %s, perc_low_qual: %s, num_reads: %s}, "\
         "min: { length: %s, avg_depth: %s, avg_gc: %s, "\
         "quality: %s, read_length: %s, "\
-        "avg_ins_size: %s, avg_paired_depth: %s"\
+        "avg_ins_size: %s, avg_paired_depth: %s, perc_low_qual: %s, num_reads: %s"\
         " } };" % (asm.max("length"), 
                    asm.depth_range()[1],
                    asm.gc_range()[1], 
@@ -81,13 +83,19 @@ def contig_statistics(asm):
                    asm.read_length_range()[1],
                    asm.max("avg_ins_size_val"),
                    asm.max("avg_paired_depth_val"),
+                   asm.perc_lowqual_range()[1],
+                   asm.max("num_reads"),
                    asm.min("length"), 
                    asm.depth_range()[0], 
                    asm.gc_range()[0], 
                    asm.qual_range()[0], 
                    asm.read_length_range()[0],
                    asm.min("avg_ins_size_val"),
-                   asm.min("avg_paired_depth_val"))
+                   asm.min("avg_paired_depth_val"),
+                   asm.perc_lowqual_range()[0],
+                   asm.min("num_reads")
+                   )
+                           
     
     s += 'CONTIGO.hist_data = { "avg_depth": [%s], '\
         '"quality": [%s], "read_length": [%s], "avg_paired_depth": [%s] };' % \
