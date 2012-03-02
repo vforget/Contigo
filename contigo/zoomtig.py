@@ -692,7 +692,7 @@ def draw_contig(contig, out_dir, read_status, otype, pair_status, PROCESSES):
     
     images = []
     multiprocessing.freeze_support()
-    pool = multiprocessing.Pool(PROCESSES)
+    #pool = multiprocessing.Pool(PROCESSES)
     TASKS = []
     for i, segment in enumerate(segments):
         image_name = out_dir + "%s" % (i)
@@ -703,8 +703,8 @@ def draw_contig(contig, out_dir, read_status, otype, pair_status, PROCESSES):
         if otype == 'templates':
             img_width = segment_size
         
-        TASKS.append((draw_segment, (img_width, img_height, contig, segment, otype, segmented_shotgun_reads, i, read_status, pair_status, image_name)))
-        
+        #TASKS.append((draw_segment, (img_width, img_height, contig, segment, otype, segmented_shotgun_reads, i, read_status, pair_status, image_name)))
+        draw_segment(img_width, img_height, contig, segment, otype, segmented_shotgun_reads, i, read_status, pair_status, image_name)
         # draw_segment(img_width, img_height, contig, segment, otype, segmented_shotgun_reads, i, read_status, pair_status, image_name)
         
         ## img = Image.new("RGB", (img_width, img_height), IMG_BG)
@@ -725,7 +725,7 @@ def draw_contig(contig, out_dir, read_status, otype, pair_status, PROCESSES):
         ##                  segment_start, segment_size, pair_status)
         ## img.save(image_name + ".png")
         
-    pool.map_async(calculatestar, TASKS).get(9999999)
+    #pool.map_async(calculatestar, TASKS).get(9999999)
     return images, pan_width, pan_height
 
 def draw_contig_2(contig, out_dir, read_status, otype, pair_status, pxbp):
@@ -912,7 +912,7 @@ def tile_image(tile_dir, image_name, last_col):
 
 def create_zoomtig(out_dir, num_levels, images, PROCESSES):
     multiprocessing.freeze_support()
-    pool = multiprocessing.Pool(PROCESSES)
+    #pool = multiprocessing.Pool(PROCESSES)
     for level in range(num_levels, -1, -1):
         
         
@@ -933,8 +933,9 @@ def create_zoomtig(out_dir, num_levels, images, PROCESSES):
             last_col += num_cols
         TASKS = []
         for idx, image_name in enumerate(images):
-            TASKS.append((tile_image, (tile_dir, image_name, col_offsets[idx])))
-        pool.map_async(calculatestar, TASKS).get(9999999)
+            #TASKS.append((tile_image, (tile_dir, image_name, col_offsets[idx])))
+            tile_image(tile_dir, image_name, col_offsets[idx])
+        #pool.map_async(calculatestar, TASKS).get(9999999)
         #for idx, image_name in enumerate(images):
         #    tile_image(tile_dir, image_name, col_offsets[idx])
         resize_images(images)
