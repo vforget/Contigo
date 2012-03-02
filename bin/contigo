@@ -214,7 +214,7 @@ def reads_to_taffydb(options, contig):
     asm_width = contig.end - contig.start
     of = []
     # Added by VF on 25/01/2010. Skip computing this method ...
-    # return (asm_width / zoomtig.DEFAULT_SEGMENT_WIDTH) + 1
+    return (asm_width / zoomtig.DEFAULT_SEGMENT_WIDTH) + 1
     for i in range(0, (asm_width / zoomtig.DEFAULT_SEGMENT_WIDTH) + 1):
         f = open(options.output_dir + "/json/" + contig.name + "_" + str(i) + "_reads.json", "w")
         print >> f, '(['
