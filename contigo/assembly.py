@@ -590,7 +590,7 @@ def get_seq(f):
             data += line.strip()
         else:
             indata = False
-    return data
+    return data.upper()
         
 def get_qual(f):
     ''' Get quality values.
