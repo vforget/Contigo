@@ -33,8 +33,12 @@ FONT_DIR = sys.path[0] + "/../contigo/static/fonts/"
 TTF = FONT_DIR + "Verdana.ttf"
 
 
-BASE_COLORS = { 'A': (255,80,80), 'C': (80,255,80), 'G': (80,80,255),\
-                'T': (255,255,80), '*': (80,255,255), 'N': (255,80,255)}
+BASE_COLORS = { 
+    'A': (255,80,80), 'C': (80,255,80), 'G': (80,80,255), 'T': (255,255,80), 
+    'a': (255,80,80), 'c': (80,255,80), 'g': (80,80,255), 't': (255,255,80),
+    'n': (255,80,255), 'N': (255,80,255),
+    '*': (80,255,255)
+    }
 
 SMALL_FONT = ImageFont.load(FONT_DIR + "fixed.6.pil")
 # SMALL_FONT = ImageFont.truetype(sys.path[0] + '/fonts/04B_24__.TTF', 8)
