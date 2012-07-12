@@ -5,7 +5,18 @@ import datetime
 import sys
 import locale
 
-locale.setlocale(locale.LC_ALL, 'en_US')
+def set_locale():
+    version_info = sys.version_info
+    print version_info
+    if version_info[0] != 2:
+        exit("Contigo requires Python version 2.x.")
+
+    if version_info[1] < 7:
+        locale.setlocale(locale.LC_ALL, 'en_US')
+    if version_info[1] >= 7:
+        locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
+
+
 HTML_DIR = sys.path[0] + "/../contigo/static/html/"
 
 def html_header():
@@ -58,7 +69,7 @@ def contig_table_header():
     return s
     
 def contig_table_row(contig_statistic, link):
-    
+    set_locale()
     s = "<tr>"
     s += "<td>"
     s += '</td><td>'.join([
