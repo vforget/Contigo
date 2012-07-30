@@ -2,8 +2,6 @@ TODO
 ====
 
 Documentation:
- * Write INSTALL.
- * Write help webpage.
 
 Bugs:
 
