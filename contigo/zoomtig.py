@@ -27,9 +27,9 @@ def get_font_dim(fn):
     return ImageDraw.Draw(
         Image.new("RGB", (1000,1000), (255,255,255))).textsize("A", font=fn)
     
-FONT_DIR = sys.path[0] + "/../contigo/static/fonts/"
+FONT_DIR = os.path.join(os.path.dirname(__file__)) + "/static/fonts/"
+# FONT_DIR = sys.path[0] + "/../contigo/static/fonts/"
 TTF = FONT_DIR + "Verdana.ttf"
-
 
 BASE_COLORS = { 
     'A': (255,80,80), 'C': (80,255,80), 'G': (80,80,255), 'T': (255,255,80), 

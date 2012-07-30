@@ -4,6 +4,7 @@
 import datetime
 import sys
 import locale
+import os
 
 def set_locale():
     version_info = sys.version_info
@@ -17,7 +18,7 @@ def set_locale():
         locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 
-HTML_DIR = sys.path[0] + "/../contigo/static/html/"
+HTML_DIR = os.path.join(os.path.dirname(__file__)) + "/static/html/"
 
 def html_header():
     return """ TEXT """

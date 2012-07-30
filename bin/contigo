@@ -16,16 +16,17 @@ import multiprocessing
 # For testing
 # sys.path.append("/home/vforget/Dropbox/projects/apps/Contigo")
 
-from contigo import *
-STATIC_DIR = sys.path[0] + "/../contigo/static/"
+STATIC_DIR = os.path.join(os.path.dirname(__file__)) + "/../../contigo/static/"
 
+from contigo import *
+
+#STATIC_DIR = sys.path[0] + "/../contigo/static/"
 
 def update_interface(options, contig_table, scaffold_table):
     '''Copies interface from source distribution to output dir
        Parameters: OUTDIR, HTML contig table, HTML scaffold table
        Returns: Nothing.
     '''
-    print sys.path[0]
     try:
         output_dir = options.output_dir
         if os.path.exists(output_dir + "/js"):
