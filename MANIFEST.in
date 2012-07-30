@@ -1,5 +1,7 @@
-graft docs
 graft bin
+graft misc
 include *.txt
+include *.rst
 graft contigo/static
 global-exclude *~
+recursive-include contigo/static *
