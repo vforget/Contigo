@@ -1,4 +1,6 @@
-# Ignore emacs backup files
 *~
-#Ignore compiled python files
 *.pyc
+\#*
+MANIFEST
+misc/
+build/
