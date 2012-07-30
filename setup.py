@@ -12,6 +12,6 @@ setup(
     url='https://github.com/vforget/contigo',
     license='LICENCE.txt',
     description='Web-based assembly viewer.',
-    long_description=open('README').read(),
+    long_description=open('README.rst').read(),
     requires=['PIL']
 )
