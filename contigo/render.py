@@ -8,7 +8,7 @@ import os
 
 def set_locale():
     version_info = sys.version_info
-    print version_info
+    
     if version_info[0] != 2:
         exit("Contigo requires Python version 2.x.")
 

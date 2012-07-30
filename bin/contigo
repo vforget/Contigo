@@ -262,7 +262,7 @@ def main():
     if asm.num_templates > 0:
         asm.pxbp = 500/asm.avg_insert_size
     c = 0
-    print "%s/%s" % (options.input_dir, options.assembly)
+    print "Processing %s/%s" % (options.input_dir, options.assembly)
     for contig in assembly.load_ace(options.input_dir + "/" +
                                     options.assembly, options.platform):
         
