@@ -13,7 +13,8 @@ import math
 import datetime
 import multiprocessing
 
-sys.path.append("/home/vforget/Dropbox/projects/apps/Contigo")
+# For testing
+# sys.path.append("/home/vforget/Dropbox/projects/apps/Contigo")
 
 from contigo import *
 STATIC_DIR = sys.path[0] + "/../contigo/static/"
