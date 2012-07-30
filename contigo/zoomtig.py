@@ -41,6 +41,7 @@ BASE_COLORS = {
     }
 
 SMALL_FONT = ImageFont.load(FONT_DIR + "fixed.6.pil")
+# SMALL_FONT = ImageFont.load(FONT_DIR + "AtariSmall.pil")
 # SMALL_FONT = ImageFont.truetype(sys.path[0] + '/fonts/04B_24__.TTF', 8)
 MED_FONT = ImageFont.truetype(TTF, 32)
 LRG_FONT = ImageFont.truetype(TTF,  64)
