@@ -52,11 +52,11 @@ https://github.com/vforget/Contigo/tree/master/misc
 
 By default contiGo searches for 454Contigs.ace. To use another ace file name use the -a option::
 
-  $ contigo -i ~/Contigo/misc/ -o ~/tmp -a some_other_assembly.ace
+  $ contigo -i ~/assembly_dir -o ~/tmp -a some_other_assembly.ace
 
 To test contiGo out on a larger assembly you can skip generating the pileup images with the -n option::
 
-  $ contigo -i ~/Contigo/misc/ -o ~/tmp -n
+  $ contigo -i ~/assembly_dir -o ~/tmp -n
 
 For more information on how to use contigo see the help message::
 
