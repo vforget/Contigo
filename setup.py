@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='Contigo',
-    version='0.1.0',
+    version='1.0.0',
     author="Vince Forgetta",
     author_email="vincenzo.forgetta@mail.mcgill.ca",
     packages=['contigo'],
