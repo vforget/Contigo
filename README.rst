@@ -7,7 +7,6 @@ SUMMARY
 
 ContiGo is a program that visualizes genome assemblies in a web browser. 
 
-
 INSTALL
 -------
 
@@ -36,26 +35,32 @@ NOTE: ContiGo works best with a recent version of Firefox. Google Chrome and Ope
 
 To generate a contiGo assembly view of an ACE file::
 
-  python <contigo_path>/bin/contigo -i <path_to_ace> -o <out_dir>
+  $ contigo -i <path_to_ace> -o <out_dir>
 
-For example, if you put contiGo in your home directory::
+For example::
 
   $ mkdir -p ~/tmp
-  $ python ~/Contigo/bin/contigo -i ~/Contigo/misc/ -o ~/tmp
+  $ contigo -i ~/assembly_dir -o ~/tmp
 
-Browse to ~/tmp/contigo.html in a web browser.
+ContiGo will seach ~/assembly_dir for a 454Contigs.ace file and put the output in ~/tmp.
 
-To test contiGo out on a larger assembly you can skip generating the pileup images with the -n option::
+To view the assembly, direct your web browser to ~/tmp/contigo.html.
 
-  $ python ~/Contigo/bin/contigo -i ~/Contigo/misc/ -o ~/tmp -n
+To give it a try a small example ACE file is available here:
+
+https://github.com/vforget/Contigo/tree/master/misc
 
 By default contiGo searches for 454Contigs.ace. To use another ace file name use the -a option::
 
-  $ python ~/Contigo/bin/contigo -i ~/Contigo/misc/ -o ~/tmp -a some_other_assembly.ace
+  $ contigo -i ~/Contigo/misc/ -o ~/tmp -a some_other_assembly.ace
+
+To test contiGo out on a larger assembly you can skip generating the pileup images with the -n option::
+
+  $ contigo -i ~/Contigo/misc/ -o ~/tmp -n
 
 For more information on how to use contigo see the help message::
 
-  $ ~/Contigo/bin/contigo --help
+  $ contigo --help
 
 EXAMPLES
 --------
