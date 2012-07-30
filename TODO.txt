@@ -2,11 +2,7 @@ TODO
 ====
 
 Documentation:
- * Migrate notebook to TODO
- * Write README.
  * Write INSTALL.
- * Write LICENCE.
- * Write COPYING.
  * Write help webpage.
 
 Bugs:
@@ -14,9 +10,3 @@ Bugs:
 Features:
 
 Minor Fixes:
- * Delete paired-end features:
-   - colums in table
-   - data in summary
-   - entries in pulldown.
-   - template view in zoom
- * Consider removing read downloading functionality?
