@@ -77,7 +77,8 @@ def contig_table_row(contig_statistic, link):
         link,
         '<a href="contigo.html" onclick="loadFasta(\'%s\'); return false;" title="View Contig Sequence in FASTA format">%s</a>' % (contig_statistic.name, locale.format("%d", contig_statistic.length, grouping=True),),
         # '<a href="contigo.html" onclick="loadFasta(\'%s\'); return false;" title="View Contig Sequence in FASTA format">%s</a>' % (contig_statistic.name, contig_statistic.length),
-        '<a href="contigo.html" onclick="loadReads(\'%s\', %s); return false;" title="View Contig Read Sequences in FASTA format">%s</a>' % (contig_statistic.name, contig_statistic.num_segments, locale.format("%d", contig_statistic.num_reads, grouping=True),),
+        #'<a href="contigo.html" onclick="loadReads(\'%s\', %s); return false;" title="View Contig Read Sequences in FASTA format">%s</a>' % (contig_statistic.name, contig_statistic.num_segments, locale.format("%d", contig_statistic.num_reads, grouping=True),),
+        '%s' % (locale.format("%d", contig_statistic.num_reads, grouping=True),),
         ("%0.2f" % contig_statistic.avg_depth()),
         '<a href="contigo.html" onclick="loadQuality(\'%s\'); return false;" title="View Contig Qualities FASTA format">%0.2f</a>' % (contig_statistic.name, contig_statistic.perc_lowqual(),),
         ("%0.2f" % contig_statistic.perc_gc())])

@@ -11,7 +11,9 @@ function init_seadragon() {
     viewer.addEventListener("open", showViewport);
     viewer.addEventListener("animation", showViewport);
     Seadragon.Utils.addEvent(viewer.elmt, "mousemove", showMouse);
-    viewer.addControl(makeFetcherControl(), Seadragon.ControlAnchor.TOP_RIGHT);
+//    Diabled read fetcher. To enable coment out following line
+//    viewer.addControl(makeFetcherControl(), Seadragon.ControlAnchor.TOP_RIGHT);
+
 //    viewer.addControl(makeAssemblyControl(), Seadragon.ControlAnchor.TOP_LEFT);
 //    viewer.addControl(makeReadnameControl(), Seadragon.ControlAnchor.TOP_LEFT);
 //    viewer.addControl(makeTemplateControl(), Seadragon.ControlAnchor.TOP_LEFT);
