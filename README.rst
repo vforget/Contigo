@@ -5,28 +5,34 @@ ContiGo
 SUMMARY
 -------
 
-Contigo is a program that visualizes genome assemblies in a web browser. 
+ContiGo is a program that visualizes genome assemblies in a web browser. 
 
 
 INSTALL
 -------
 
-ContiGo requires the Python Image Library (PIL). You can find it here::
+ContiGo requires the Python Image Library (PIL). You can find it here:
 
-  http://www.pythonware.com/products/pil/
+http://www.pythonware.com/products/pil/
 
-To install Contigo, go to the directory where this README file is located and run::
+Download the latest version of ContiGo at:
 
+https://github.com/vforget/Contigo/downloads
+
+Extract the archive and install contiGo::
+
+  $ tar xvzf Contigo-version.tar.gz
+  $ cd Contigo-version
   $ python setup.py install
 
-This will require root priviledges. As a result you may need to::
+The last command may require root priviledges. As a result you may need to::
 
   $ sudo python setup.py install
 
 USAGE
 -----
 
-NOTE: Contigo works best with a recent version of Firefox. Google Chrome and Opera are functional, but buggy. Internet Explorer is not supported.
+NOTE: ContiGo works best with a recent version of Firefox. Google Chrome and Opera are functional, but buggy. Internet Explorer is not supported.
 
 To generate a contiGo assembly view of an ACE file::
 
@@ -54,9 +60,9 @@ For more information on how to use contigo see the help message::
 EXAMPLES
 --------
 
-A live demo of contiGo for a genome assembly of *E. fergusonii* isolate ECD-227 can be found at::
+A live demo of contiGo for a genome assembly of *E. fergusonii* isolate ECD-227 can be found at:
 
-  http://www.genomequebec.mcgill.ca/compgen/contigo/ECD227/contigo.html
+http://www.genomequebec.mcgill.ca/compgen/contigo/ECD227/contigo.html
 
 AUTHOR
 ------
