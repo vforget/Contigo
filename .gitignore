@@ -4,3 +4,5 @@
 MANIFEST
 misc/
 build/
+dist/
+Contigo.egg-info/
