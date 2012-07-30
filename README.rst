@@ -1,66 +1,64 @@
 =======
-Contigo
+ContiGo
 =======
 
-CONTENTS
---------
-
-/A SUMMARY
-/B INSTALL
-/C USAGE
-/D EXAMPLES
-/E AUTHOR
-
-/A SUMMARY
+SUMMARY
+-------
 
 Contigo is a program that visualizes genome assemblies in a web browser. 
 
-/B INSTALL
 
-ContiGo requires the Python Image Library (PIL). You can find it here:
+INSTALL
+-------
 
-http://www.pythonware.com/products/pil/
+ContiGo requires the Python Image Library (PIL). You can find it here::
 
-To install Contigo, go to the directory where this README file is located and run:
+  http://www.pythonware.com/products/pil/
 
-$ python setup.py install
+To install Contigo, go to the directory where this README file is located and run::
 
-This will require root priviledges. As a result you may need to:
+  $ python setup.py install
 
-$ sudo python setup.py install
+This will require root priviledges. As a result you may need to::
 
-/C USAGE
+  $ sudo python setup.py install
+
+USAGE
+-----
 
 NOTE: Contigo works best with a recent version of Firefox. Google Chrome and Opera are functional, but buggy. Internet Explorer is not supported.
 
-To generate a contiGo assembly view of an ACE file:
+To generate a contiGo assembly view of an ACE file::
 
-python <contigo_path>/bin/contigo -i <path_to_ace> -o <out_dir>
+  python <contigo_path>/bin/contigo -i <path_to_ace> -o <out_dir>
 
-For example, if you put contiGo in your home directory:
+For example, if you put contiGo in your home directory::
 
-$ mkdir -p ~/tmp
-$ python ~/Contigo/bin/contigo -i ~/Contigo/misc/ -o ~/tmp
+  $ mkdir -p ~/tmp
+  $ python ~/Contigo/bin/contigo -i ~/Contigo/misc/ -o ~/tmp
 
 Browse to ~/tmp/contigo.html in a web browser.
 
-To make test it out on a larger assembly you can skip generating the pileup iamges with the -n option:
+To make test it out on a larger assembly you can skip generating the pileup iamges with the -n option::
 
-$ python ~/Contigo/bin/contigo -i ~/Contigo/misc/ -o ~/tmp -n
+  $ python ~/Contigo/bin/contigo -i ~/Contigo/misc/ -o ~/tmp -n
 
-By default contiGo searches for 454Contigs.ace. To use another ace file name use the -a option:
+By default contiGo searches for 454Contigs.ace. To use another ace file name use the -a option::
 
-$ python ~/Contigo/bin/contigo -i ~/Contigo/misc/ -o ~/tmp -a some_other_assembly.ace
+  $ python ~/Contigo/bin/contigo -i ~/Contigo/misc/ -o ~/tmp -a some_other_assembly.ace
 
-For more information on how to use contigo see the help message:
+For more information on how to use contigo see the help message::
 
-$ ~/Contigo/bin/contigo --help
+  $ ~/Contigo/bin/contigo --help
 
-/D EXAMPLES
-A live demo of contiGo for a genome assembly of *E. fergusonii* isolate ECD-227 can be found at:
+EXAMPLES
+--------
 
-http://www.genomequebec.mcgill.ca/compgen/contigo/ECD227/contigo.html
+A live demo of contiGo for a genome assembly of *E. fergusonii* isolate ECD-227 can be found at::
 
-/E AUTHOR
+  http://www.genomequebec.mcgill.ca/compgen/contigo/ECD227/contigo.html
+
+AUTHOR
+------
 Written by Vince Forgetta.
 Contact: vincenzo.forgetta at mail.mcgill.ca
