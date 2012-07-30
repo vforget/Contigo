@@ -14,8 +14,6 @@ import os
 import assembly
 import multiprocessing
 
-
-
 class ImageConfig:
     pass
 
