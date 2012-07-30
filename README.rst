@@ -39,7 +39,7 @@ For example, if you put contiGo in your home directory::
 
 Browse to ~/tmp/contigo.html in a web browser.
 
-To make test it out on a larger assembly you can skip generating the pileup iamges with the -n option::
+To test contiGo out on a larger assembly you can skip generating the pileup images with the -n option::
 
   $ python ~/Contigo/bin/contigo -i ~/Contigo/misc/ -o ~/tmp -n
 
