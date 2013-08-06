@@ -16,7 +16,7 @@ http://www.pythonware.com/products/pil/
 
 Download the latest version of ContiGo at:
 
-https://github.com/vforget/Contigo/downloads
+https://github.com/vforget/Contigo/releases
 
 Extract the archive and install contiGo::
 
